@@ -57,14 +57,27 @@ class DatabaseService {
                 return
             }
             for album in albums {
-                let albumObject = NSManagedObject(entity: albumEntity, insertInto: privateContext)
-            
-                albumObject.setValue(album["id"], forKey: "id")
-                albumObject.setValue(album["title"], forKey: "title")
-                // Initialize page (it's 1, not 0)
-                albumObject.setValue(1, forKey: "pageLoaded")
+                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Albums")
+                fetchRequest.predicate = NSPredicate(format: "id = %@", argumentArray: [album["id"] as! Int16])
+                do {
+                    let existingAlbum = try privateContext.fetch(fetchRequest)
+                    if existingAlbum.count > 0 {
+                        if let albumToUpdate = existingAlbum.first as? NSManagedObject {
+                            albumToUpdate.setValue(album["title"], forKey: "title")
+                        }
+                    } else {
+                        let albumObject = NSManagedObject(entity: albumEntity, insertInto: privateContext)
+                    
+                        albumObject.setValue(album["id"], forKey: "id")
+                        albumObject.setValue(album["title"], forKey: "title")
+                        // Initialize page (it's 1, not 0)
+                        albumObject.setValue(1, forKey: "pageLoaded")
+                    }
+                } catch {
+                    print("Unable to retrieve album | Error: \(error)")
+                    completion(false)
+                }
             }
-            
             do {
                 try privateContext.save()
                 completion(true)
@@ -145,14 +158,33 @@ class DatabaseService {
                 return
             }
             for photo in photos {
-                let photoObject = NSManagedObject(entity: photosEntity, insertInto: privateContext)
-            
-                photoObject.setValue(photo["albumId"], forKey: "albumId")
-                photoObject.setValue(photo["id"], forKey: "id")
-                photoObject.setValue(photo["title"], forKey: "title")
-                photoObject.setValue(photo["url"], forKey: "imageUrl")
-                photoObject.setValue(photo["thumbnailUrl"], forKey: "thumbnailUrl")
-                photoObject.setValue(Int16.random(in: 0...2), forKey: "tag")
+                
+                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Photos")
+                fetchRequest.predicate = NSPredicate(format: "id = %@ AND albumId = %@",
+                                                     argumentArray: [photo["id"] as! Int16, photo["albumId"] as! Int16])
+                do {
+                    let existingPhoto = try privateContext.fetch(fetchRequest)
+                    if existingPhoto.count > 0 {
+                        if let photoToUpdate = existingPhoto.first as? NSManagedObject {
+                            photoToUpdate.setValue(photo["title"], forKey: "title")
+                            photoToUpdate.setValue(photo["url"], forKey: "imageUrl")
+                            photoToUpdate.setValue(photo["thumbnailUrl"], forKey: "thumbnailUrl")
+                        }
+                    } else {
+                        
+                        let photoObject = NSManagedObject(entity: photosEntity, insertInto: privateContext)
+                    
+                        photoObject.setValue(photo["albumId"], forKey: "albumId")
+                        photoObject.setValue(photo["id"], forKey: "id")
+                        photoObject.setValue(photo["title"], forKey: "title")
+                        photoObject.setValue(photo["url"], forKey: "imageUrl")
+                        photoObject.setValue(photo["thumbnailUrl"], forKey: "thumbnailUrl")
+                        photoObject.setValue(Int16.random(in: 0...2), forKey: "tag")
+                    }
+                } catch {
+                    print("Unable to retrieve album | Error: \(error)")
+                    completion(false)
+                }
             }
             
             do {
