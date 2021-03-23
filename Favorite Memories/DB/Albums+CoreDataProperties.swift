@@ -2,7 +2,7 @@
 //  Albums+CoreDataProperties.swift
 //  Favorite Memories
 //
-//  Created by Epsilon User on 17/3/21.
+//  Created by Epsilon User on 19/3/21.
 //
 //
 
@@ -18,6 +18,7 @@ extension Albums {
 
     @NSManaged public var id: Int16
     @NSManaged public var title: String
+    @NSManaged public var pageLoaded: Int16
 
 }
 
