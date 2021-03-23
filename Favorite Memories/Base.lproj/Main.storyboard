@@ -1,24 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pii-Iq-V7l">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Navigation Controller-->
+        <scene sceneID="1Ib-SX-H2x">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pii-Iq-V7l" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ErW-KQ-amq">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.95310324430000004" green="0.76559430360000003" blue="0.48405694960000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VpO-sU-DZI" kind="relationship" relationship="rootViewController" id="fzp-cc-WX4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0NI-B6-aKU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="50.724637681159422" y="88.392857142857139"/>
+        </scene>
+        <!--Albums Collection-->
+        <scene sceneID="Umj-mh-7mH">
+            <objects>
+                <collectionViewController id="VpO-sU-DZI" customClass="AlbumsCollection" customModule="Favorite_Memories" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" id="e79-2E-gFc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6tp-R8-SR5">
+                            <size key="itemSize" width="180" height="180"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="VpO-sU-DZI" id="WxH-Cr-H2m"/>
+                            <outlet property="delegate" destination="VpO-sU-DZI" id="9jn-iL-zDi"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="vD8-ns-d9e"/>
+                    <connections>
+                        <segue destination="TWc-Se-Rir" kind="show" identifier="showPhotoList" id="dS2-dX-Onf"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A1a-rT-LTC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1368" y="94"/>
+        </scene>
+        <!--Photos List Table View-->
+        <scene sceneID="Wdw-3b-POY">
+            <objects>
+                <tableViewController id="TWc-Se-Rir" customClass="PhotosListTableView" customModule="Favorite_Memories" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="rZn-o2-QCb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                        <connections>
+                            <outlet property="dataSource" destination="TWc-Se-Rir" id="BVg-Ar-WE5"/>
+                            <outlet property="delegate" destination="TWc-Se-Rir" id="V24-p9-4to"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="nC2-hH-MwI"/>
+                    <connections>
+                        <segue destination="B78-tV-DfG" kind="show" identifier="showPhoto" id="YAp-pa-GVs"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J5K-eW-bOd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2774" y="94"/>
+        </scene>
+        <!--Photo View-->
+        <scene sceneID="PC7-0r-DA5">
+            <objects>
+                <viewController id="B78-tV-DfG" customClass="PhotoView" customModule="Favorite_Memories" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QZk-ia-bTu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bCY-fp-r5h" customClass="ImageScrollView" customModule="Favorite_Memories" customModuleProvider="target">
+                                <rect key="frame" x="20" y="88" width="374" height="774"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="2df-Xi-3LY"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="4iR-Cg-gHH"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1SQ-0E-Arc"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bCY-fp-r5h" firstAttribute="leading" secondItem="1SQ-0E-Arc" secondAttribute="leading" id="JLB-sc-6HK"/>
+                            <constraint firstItem="bCY-fp-r5h" firstAttribute="top" secondItem="1SQ-0E-Arc" secondAttribute="top" id="UhK-w7-LPW"/>
+                            <constraint firstItem="1SQ-0E-Arc" firstAttribute="bottom" secondItem="bCY-fp-r5h" secondAttribute="bottom" id="eCy-DK-PjB"/>
+                            <constraint firstItem="bCY-fp-r5h" firstAttribute="trailing" secondItem="1SQ-0E-Arc" secondAttribute="trailing" id="pXE-pL-wlB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="L41-OO-eeE"/>
+                    <connections>
+                        <outlet property="imageScrollView" destination="bCY-fp-r5h" id="EIW-Am-Ukl"/>
+                        <segue destination="Rbk-yh-wRl" kind="unwind" identifier="unwindToList" unwindAction="unwind:" id="WhJ-3P-h0r"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6sq-OP-ake" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="Rbk-yh-wRl" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="4328.985507246377" y="93.75"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
